@@ -1,0 +1,16 @@
+version: "3.6"
+
+services:
+  so1:
+    image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
+    container_name: so1
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_APPS_URL=https://splunkbase.splunk.com/app/5418/release/1.2.3/download,https://splunkbase.splunk.com/app/5419/release/1.1.2/download,https://splunkbase.splunk.com/app/1724/release/3.5.0/download
+      - SPLUNKBASE_USERNAME
+      - SPLUNKBASE_PASSWORD
+      - SPLUNK_PASSWORD
+    ports:
+      - 8000:8000
+      - 8089:8089
+      
