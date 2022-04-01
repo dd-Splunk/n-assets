@@ -1,0 +1,35 @@
+<form>
+  <label>Location</label>
+  <fieldset submitButton="false">
+    <input type="dropdown" token="location" searchWhenChanged="true">
+      <label>Location</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup n_locations.csv</query>
+      </search>
+      <default>*</default>
+      <fieldForLabel>Location</fieldForLabel>
+      <fieldForValue>Location</fieldForValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Assets models by Location</title>
+      <map>
+        <search>
+          <query>| inputlookup n_assets.csv | search Location=$location$ | lookup n_countries.csv country AS Location OUTPUTNEW latitude AS lat longitude AS lon | geostats count by Model</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="mapping.map.center">(55.48,-34.45)</option>
+        <option name="mapping.map.zoom">3</option>
+        <option name="mapping.type">marker</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </map>
+    </panel>
+  </row>
+</form>

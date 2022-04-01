@@ -1,0 +1,31 @@
+<form>
+  <label>Assets</label>
+  <fieldset submitButton="false">
+    <input type="text" token="id" searchWhenChanged="true">
+      <label>AssetID</label>
+      <default>*</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>| inputlookup n_assets.csv | search AssetID=$id$</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">search?q=%7C%20inputlookup%20n_assets.csv%20%7C%20search%20%20$click.name2$%3D$click.value2$&amp;earliest=-24h@h&amp;latest=now</link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>
