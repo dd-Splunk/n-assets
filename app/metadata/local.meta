@@ -8,7 +8,7 @@ modtime = 1648653891.261630000
 
 [app/install/install_source_checksum]
 version = 8.2.5
-modtime = 1648807132.200323000
+modtime = 1649064664.550707000
 
 [lookups/n_assets.csv]
 owner = admin
@@ -23,7 +23,7 @@ modtime = 1648803029.158627000
 [views/location]
 owner = admin
 version = 8.2.5
-modtime = 1648803071.276539000
+modtime = 1649237344.475289000
 
 [lookups/n_locations.csv]
 access = read : [ * ], write : [ admin ]
@@ -42,9 +42,16 @@ modtime = 1648802933.342739000
 [views/site_mons]
 owner = admin
 version = 8.2.5
-modtime = 1648804216.285698000
+modtime = 1649235269.205068000
 
 [views/assets]
 owner = admin
 version = 8.2.5
 modtime = 1648806612.154308000
+
+[views/users]
+access = read : [ * ], write : [ admin, power ]
+export = none
+owner = admin
+version = 8.2.5
+modtime = 1649237558.329781000
