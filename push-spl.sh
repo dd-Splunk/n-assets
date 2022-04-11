@@ -3,7 +3,7 @@ APP=${PWD##*/}
 APP_FILE=${APP}.spl
 APP_LOCATION=/tmp/${APP_FILE}
 source .env
-git add .
+git add *
 git commit -m "latest push"
 git archive -v --format=tar --prefix=$APP/ -o  $APP_FILE main
 echo "Uploading ${APP_FILE} ..."
