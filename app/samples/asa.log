@@ -1,4 +1,2 @@
-Apr  7 10:20:33 10.1.1.1 %ASA-7-734003: DAP: User John.Doe@defaulyt.com, Addr 10.200.200.100: Session Attribute endpoint.os.version="Windows 10"
-Apr  7 10:20:33 10.1.1.1 %ASA-7-734003: DAP: User John.Doe@defaulyt.com, Addr 10.200.200.100: Session Attribute endpoint.device.protection_version="4.10.02086"
-Apr  7 10:20:33 10.1.1.1 %ASA-7-734003: DAP: User John.Doe@defaulyt.com, Addr 10.200.200.100: Session Attribute endpoint.device.hostname="LAPTOP_JOHN_DOE"
-Apr  7 10:20:33 10.1.1.1 %ASA-7-734003: DAP: User John.Doe@defaulyt.com, Addr 10.200.200.100: Session Attribute endpoint.anyconect.devicetype="Dell Inc. Latitude 7490"
+Apr  7 10:20:33 10.1.1.1 %ASA-7-734003: DAP: User @USER Addr 10.200.200.100: Session Attribute endpoint.device.hostname="@ASSET"
+
