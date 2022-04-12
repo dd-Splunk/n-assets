@@ -1,11 +1,11 @@
 [app/install/install_source_checksum]
 version = 8.2.5
-modtime = 1649769840.301446000
+modtime = 1649778013.567074000
 
 [views/executive_overview]
 owner = admin
 version = 8.2.5
-modtime = 1649749166.526382000
+modtime = 1649781051.993389000
 
 [indexes/vpn]
 owner = admin
@@ -17,3 +17,10 @@ access = read : [ * ], write : [ admin, power ]
 export = system
 version = 8.2.5
 modtime = 1649770054.896667000
+
+[lookups/asset_ids.csv]
+access = read : [ * ], write : [ admin ]
+export = system
+owner = admin
+version = 8.2.5
+modtime = 1649777321.019030000
