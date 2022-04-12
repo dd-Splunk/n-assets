@@ -4,7 +4,7 @@ APP_FILE=${APP}.spl
 APP_LOCATION=/tmp/${APP_FILE}
 source .env
 echo "Creating ${APP_FILE}"
-tar -cf  ${APP_FILE} -s /^app/$APP/ app/*
+tar --disable-copyfile -cf ${APP_FILE} -s /^app/$APP/ app/*
 echo "Uploading ${APP_FILE} ..."
 docker cp $APP_FILE so1:$APP_LOCATION
 echo "Asking Splunk to remove old ${APP} ..."
