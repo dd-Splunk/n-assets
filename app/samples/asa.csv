@@ -1,4 +1,10 @@
-user1@acme.com,asset1
-user2@acme.com,asset2
-user3@acme.com,asset3
+user1@dep1.acme.com,pc1
+user1@dep1.acme.com,mobile1
+user1@dep1.acme.com,tablet1
+user2@dep1.acme.com,pc2
+user2@dep1.acme.com,mobile2
+user2@dep1.acme.com,tablet2
+user3@dep1.acme.com,pc3
+user3@dep1.acme.com,mobile3
+user3@dep1.acme.com,tablet3
 
