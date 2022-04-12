@@ -9,7 +9,7 @@ git archive -v --format=tar --prefix=$APP/ -o  $APP_FILE main
 echo "Uploading ${APP_FILE} ..."
 docker cp $APP_FILE so1:$APP_LOCATION
 echo "Asking Splunk to remove ${APP} ..."
-# curl -X DELETE -k -u admin:$SPLUNK_PASSWORD https://$SPLUNK_HOST:8089/services/apps/local/$APP
+curl -X DELETE -k -u admin:$SPLUNK_PASSWORD https://$SPLUNK_HOST:8089/services/apps/local/$APP
 # echo "Asking Splunk to install ${APP_FILE} ..."
 # curl -X POST -k -u admin:$SPLUNK_PASSWORD https://$SPLUNK_HOST:8089/services/apps/local \
 #     -H 'Content-Type: application/x-www-form-urlencoded' \
