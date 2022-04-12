@@ -1,6 +1,6 @@
 [app/install/install_source_checksum]
 version = 8.2.5
-modtime = 1649748811.288190000
+modtime = 1649769840.301446000
 
 [views/executive_overview]
 owner = admin
@@ -11,3 +11,9 @@ modtime = 1649749166.526382000
 owner = admin
 version = 8.2.5
 modtime = 1649749328.966754000
+
+[]
+access = read : [ * ], write : [ admin, power ]
+export = system
+version = 8.2.5
+modtime = 1649770054.896667000
