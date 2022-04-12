@@ -1,2 +1,2 @@
-Apr  7 10:20:33 10.1.1.1 %ASA-7-734003: DAP: User @USER Addr 10.200.200.100: Session Attribute endpoint.device.hostname="@ASSET"
+Apr  7 10:20:33 10.1.1.1 %ASA-7-734003: DAP: User @USER, Addr 10.200.200.100: Session Attribute endpoint.device.hostname="@ASSET"
 
