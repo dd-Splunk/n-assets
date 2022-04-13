@@ -5,7 +5,7 @@ modtime = 1649778013.567074000
 [views/executive_overview]
 owner = admin
 version = 8.2.5
-modtime = 1649781051.993389000
+modtime = 1649844581.067857000
 
 [indexes/vpn]
 owner = admin
@@ -24,3 +24,10 @@ export = system
 owner = admin
 version = 8.2.5
 modtime = 1649777321.019030000
+
+[savedsearches/Assets%20Active%20this%20Year]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.2.5
+modtime = 1649841341.710142000
