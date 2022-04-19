@@ -1,8 +1,8 @@
 <form version="1.1">
-  <label>Assets</label>
+  <label>Department</label>
   <fieldset submitButton="false">
     <input type="text" token="id" searchWhenChanged="true">
-      <label>AssetID</label>
+      <label>Department</label>
       <default>*</default>
     </input>
   </fieldset>
@@ -10,7 +10,7 @@
     <panel>
       <table>
         <search>
-          <query>| inputlookup n_assets.csv | search AssetID=$id$ | sort AssetID | table AssetID, *</query>
+          <query>| inputlookup n_assets.csv | search Department=$id$ | sort Department | table Department, *</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
