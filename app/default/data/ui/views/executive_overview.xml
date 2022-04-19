@@ -26,6 +26,9 @@
         <option name="unitPosition">after</option>
         <option name="useColors">0</option>
         <option name="useThousandSeparators">1</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/assets</link>
+        </drilldown>
       </single>
     </panel>
     <panel>
@@ -69,6 +72,9 @@
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/department?form.id=%22$click.value$%22</link>
+        </drilldown>
       </chart>
     </panel>
   </row>
@@ -124,10 +130,8 @@
         <search>
           <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department | dedup AssetID| table AssetID, Department | stats count(AssetID) by Department</query>
           <earliest>-30d@d</earliest>
-          <latest>now</latest>
+          <latest>@d</latest>
           <sampleRatio>1</sampleRatio>
-          <refresh>1m</refresh>
-          <refreshType>delay</refreshType>
         </search>
         <option name="charting.chart">pie</option>
         <option name="charting.drilldown">all</option>
@@ -219,6 +223,84 @@
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
       </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Active Assets (today)</title>
+      <table>
+        <search>
+          <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| dedup AssetID | sort Department, AssetID | table Department, AssetID</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>1m</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Active Assets (last 30 days)</title>
+      <table>
+        <search>
+          <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| dedup AssetID | sort Department, AssetID | table Department, AssetID</query>
+          <earliest>-30d@d</earliest>
+          <latest>@d</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Once</title>
+      <table>
+        <search>
+          <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| dedup AssetID | sort Department, AssetID | table Department, AssetID</query>
+          <earliest>@y</earliest>
+          <latest>-30d</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Stale</title>
+      <table>
+        <search>
+          <query>| inputlookup n_assets.csv | fields AssetID, Department | lookup assets_connected_this_year.csv AssetID | where isnull(Connected) | sort Department, AssetID | table Department, AssetID</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
     </panel>
   </row>
 </dashboard>
