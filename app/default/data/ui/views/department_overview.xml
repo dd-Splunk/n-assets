@@ -1,0 +1,195 @@
+<form>
+  <label>Department Overview</label>
+  <fieldset submitButton="false">
+    <input type="text" token="id">
+      <label>Department</label>
+      <default>*</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Total Managed Assets for $id$</title>
+      <single>
+        <search>
+          <query>| inputlookup n_assets.csv | search isManaged="Y" Department=$id$ | stats count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="drilldown">all</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x53a051", "0x0877a6", "0xf8be34", "0xf1813f", "0xdc4e41"]</option>
+        <option name="rangeValues">[0,30,70,100]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">0</option>
+        <option name="useThousandSeparators">1</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/assets</link>
+        </drilldown>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Active Assets (today)</title>
+      <single>
+        <search>
+          <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| search Department=$id$ | dedup AssetID | table AssetID, Department | stats count(AssetID)</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>1m</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Active Assets (last 30 days)</title>
+      <single>
+        <search>
+          <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| search Department=$id$ | dedup AssetID | table AssetID, Department | stats count(AssetID)</query>
+          <earliest>-30d</earliest>
+          <latest>@d</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Inactive but Connected once</title>
+      <single>
+        <search>
+          <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| search Department=$id$ | dedup AssetID | table AssetID, Department | stats count(AssetID)</query>
+          <earliest>@y</earliest>
+          <latest>-30d</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Stale Assets</title>
+      <single>
+        <search>
+          <query>| inputlookup n_assets.csv | fields AssetID, Department | search Department=$id$ | dedup AssetID |lookup assets_connected_this_year.csv AssetID | where isnull(Connected) | stats count(AssetID)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Active Assets (today)</title>
+      <table>
+        <search>
+          <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| search Department=$id$ | dedup AssetID | table AssetID</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>1m</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/assets?form.id=$click.value$</link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <title>Active Assets (last 30 days)</title>
+      <table>
+        <search>
+          <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| search Department=$id$ | dedup AssetID | table AssetID</query>
+          <earliest>-30d</earliest>
+          <latest>@d</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/assets?form.id=$click.value$</link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <title>Once</title>
+      <table>
+        <search>
+          <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| search Department=$id$ | dedup AssetID | table AssetID</query>
+          <earliest>@y</earliest>
+          <latest>-30d</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/assets?form.id=$click.value$</link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <title>Stale</title>
+      <table>
+        <search>
+          <query>| inputlookup n_assets.csv | fields AssetID, Department | search Department=$id$ | dedup AssetID |lookup assets_connected_this_year.csv AssetID | where isnull(Connected) | sort AssetID| table AssetID</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/assets?form.id=$click.value$</link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

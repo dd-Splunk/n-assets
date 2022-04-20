@@ -73,7 +73,7 @@
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
         <drilldown>
-          <link target="_blank">/app/n-assets/department?form.id=%22$click.value$%22</link>
+          <link target="_blank">/app/n-assets/department_overview?form.id=%22$click.value$%22</link>
         </drilldown>
       </chart>
     </panel>
