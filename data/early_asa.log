@@ -1,0 +1,4 @@
+Jan 03 13:59:33 10.1.1.1 %ASA-7-734003: DAP: User tbarabich7@nufa.org, Addr 0.168.182.80: Session Attribute endpoint.device.hostname="I1J8AA"
+Jan 04 14:58:33 10.1.1.1 %ASA-7-734003: DAP: User sgaisford8@nzza.org, Addr 0.168.182.80: Session Attribute endpoint.device.hostname="XR12HC"
+Jan 05 15:57:33 10.1.1.1 %ASA-7-734003: DAP: User dmccarron9@nzma.int, Addr 0.168.182.80: Session Attribute endpoint.device.hostname="RQZMEO"
+Jan 06 16:56:33 10.1.1.1 %ASA-7-734003: DAP: User atunnos@nrea.int, Addr 0.168.182.80: Session Attribute endpoint.device.hostname="L52CK9"
