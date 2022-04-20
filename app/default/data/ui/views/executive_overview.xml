@@ -129,7 +129,7 @@
       <chart>
         <search>
           <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department | dedup AssetID| table AssetID, Department | stats count(AssetID) by Department</query>
-          <earliest>-30d@d</earliest>
+          <earliest>-30d</earliest>
           <latest>@d</latest>
           <sampleRatio>1</sampleRatio>
         </search>
@@ -252,7 +252,7 @@
       <table>
         <search>
           <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| dedup AssetID | sort Department, AssetID | table Department, AssetID</query>
-          <earliest>-30d@d</earliest>
+          <earliest>-30d</earliest>
           <latest>@d</latest>
           <sampleRatio>1</sampleRatio>
         </search>
