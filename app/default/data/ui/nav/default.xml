@@ -1,5 +1,12 @@
 <nav search_view="search">
-  <view name="search" default='true' />
+
+  <view name="executive_overview" default='true' />
+  <view name="overview" />
+  <view name="department_overview" />
+  <view name="assets" />
+  <view name="users" />
+  <view name="site_mons" />
+  <view name="search" default='false' />
   <view name="analytics_workspace" />
   <view name="datasets" />
   <view name="reports" />
