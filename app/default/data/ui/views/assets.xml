@@ -1,5 +1,5 @@
 <form version="1.1">
-  <label>Assets</label>
+  <label>WP Assets</label>
   <fieldset submitButton="false">
     <input type="text" token="id" searchWhenChanged="true">
       <label>AssetID</label>

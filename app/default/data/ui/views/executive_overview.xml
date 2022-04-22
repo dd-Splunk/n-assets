@@ -2,7 +2,7 @@
   <label>Executive Overview</label>
   <row>
     <panel>
-      <title>Total Managed Assets</title>
+      <title>Total Managed Workplace Assets</title>
       <single>
         <search>
           <query>| inputlookup n_assets.csv | search isManaged="Y" | stats count</query>
@@ -32,7 +32,7 @@
       </single>
     </panel>
     <panel>
-      <title>Assets by Department</title>
+      <title>WP Assets by Department</title>
       <chart>
         <search>
           <query>| inputlookup n_assets.csv | search isManaged="Y"  | stats count AS Assets by Department</query>
@@ -80,7 +80,7 @@
   </row>
   <row>
     <panel>
-      <title>Active Assets (today)</title>
+      <title>Active WP Assets (today)</title>
       <chart>
         <search>
           <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| dedup AssetID | table AssetID, Department | stats count(AssetID) by Department</query>
@@ -122,10 +122,13 @@
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/department_overview?form.id=%22$click.value$%22</link>
+        </drilldown>
       </chart>
     </panel>
     <panel>
-      <title>Active Assets (last 30 days)</title>
+      <title>Active WP Assets (last 30 days)</title>
       <chart>
         <search>
           <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department | dedup AssetID| table AssetID, Department | stats count(AssetID) by Department</query>
@@ -136,6 +139,9 @@
         <option name="charting.chart">pie</option>
         <option name="charting.drilldown">all</option>
         <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/department_overview?form.id=%22$click.value$%22</link>
+        </drilldown>
       </chart>
     </panel>
     <panel>
@@ -179,10 +185,13 @@
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/department_overview?form.id=%22$click.value$%22</link>
+        </drilldown>
       </chart>
     </panel>
     <panel>
-      <title>Stale Assets</title>
+      <title>Stale WP Assets</title>
       <chart>
         <search>
           <query>| inputlookup n_assets.csv | fields AssetID, Department | lookup assets_connected_this_year.csv AssetID | where isnull(Connected) | stats count(AssetID) BY Department</query>
@@ -222,12 +231,15 @@
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/department_overview?form.id=%22$click.value$%22</link>
+        </drilldown>
       </chart>
     </panel>
   </row>
   <row>
     <panel>
-      <title>Active Assets (today)</title>
+      <title>Active WP Assets (today)</title>
       <table>
         <search>
           <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| dedup AssetID | sort Department, AssetID | table Department, AssetID</query>
@@ -239,16 +251,18 @@
         </search>
         <option name="count">10</option>
         <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
+        <option name="drilldown">cell</option>
         <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
         <option name="rowNumbers">false</option>
         <option name="totalsRow">false</option>
         <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/assets?form.id=$click.value2$</link>
+        </drilldown>
       </table>
     </panel>
     <panel>
-      <title>Active Assets (last 30 days)</title>
+      <title>Active WP Assets (last 30 days)</title>
       <table>
         <search>
           <query>index=vpn | search endpoint_attribute_name="endpoint.device.hostname" | lookup n_assets.csv AssetID AS endpoint_value OUTPUT AssetID, Department| dedup AssetID | sort Department, AssetID | table Department, AssetID</query>
@@ -258,12 +272,14 @@
         </search>
         <option name="count">10</option>
         <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
+        <option name="drilldown">cell</option>
         <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
         <option name="rowNumbers">false</option>
         <option name="totalsRow">false</option>
         <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/assets?form.id=$click.value2$</link>
+        </drilldown>
       </table>
     </panel>
     <panel>
@@ -277,11 +293,14 @@
         </search>
         <option name="count">10</option>
         <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
+        <option name="drilldown">cell</option>
         <option name="percentagesRow">false</option>
         <option name="rowNumbers">false</option>
         <option name="totalsRow">false</option>
         <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/assets?form.id=$click.value2$</link>
+        </drilldown>
       </table>
     </panel>
     <panel>
@@ -295,11 +314,14 @@
         </search>
         <option name="count">10</option>
         <option name="dataOverlayMode">none</option>
-        <option name="drilldown">none</option>
+        <option name="drilldown">cell</option>
         <option name="percentagesRow">false</option>
         <option name="rowNumbers">false</option>
         <option name="totalsRow">false</option>
         <option name="wrap">true</option>
+        <drilldown>
+          <link target="_blank">/app/n-assets/assets?form.id=$click.value2$</link>
+        </drilldown>
       </table>
     </panel>
   </row>
