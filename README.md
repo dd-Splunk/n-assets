@@ -12,5 +12,15 @@ Restart Splunk to makke changes effectives.
 
 That's it.
 
-
-
+## Create Assets
+Use the folowing spl statement
+```
+| inputlookup n_assets.csv | iplocation IPAddress
+| rename Department AS bunit, IPAddress AS ip, Location AS country, FQDN AS dns
+| rename isManaged AS is_expected, lon AS long, Mac AS mac, Username AS owner
+| eval nt_host = lower(AssetID)
+| eval priority = "medium"
+| eval should_timesync = "Y"
+| eval should_update = "Y"
+| fields ip,mac,nt_host,dns,owner,priority,lat,long,city,country,bunit,category,pci_domain,is_expected,should_timesync,should_update,requires_av,cim_entity_zone
+```
