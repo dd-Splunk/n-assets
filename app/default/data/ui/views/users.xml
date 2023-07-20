@@ -11,7 +11,7 @@
       <title>User $id$ assets location</title>
       <map>
         <search>
-          <query>|inputlookup n_assets.csv | search Username=da* | lookup n_countries.csv country AS Location | geostats latfield=latitude longfield=longitude count</query>
+          <query>|inputlookup n_assets.csv | search Username=$id$ | lookup n_countries.csv country AS Location | geostats latfield=latitude longfield=longitude count</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -38,6 +38,7 @@
         <option name="mapping.tileLayer.minZoom">0</option>
         <option name="mapping.tileLayer.tileOpacity">1</option>
         <option name="mapping.type">marker</option>
+        <option name="refresh.display">progressbar</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
