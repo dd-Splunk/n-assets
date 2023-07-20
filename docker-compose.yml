@@ -2,11 +2,13 @@ version: "3.6"
 
 services:
   so1:
-    image: ${SPLUNK_IMAGE:-splunk/splunk:latest}
+    image: splunk/splunk:${SPLUNK_IMAGE-:latest}
+    platform: linux/amd64
     container_name: so1
     environment:
       - SPLUNK_START_ARGS=--accept-license
-      - SPLUNK_APPS_URL=https://splunkbase.splunk.com/app/1924/release/7.2.1/download,https://splunkbase.splunk.com/app/1603/release/8.2.4/download,https://splunkbase.splunk.com/app/5418/release/1.2.3/download,https://splunkbase.splunk.com/app/5419/release/1.1.2/download,https://splunkbase.splunk.com/app/1724/release/3.5.0/download,https://splunkbase.splunk.com/app/1620/release/4.2.0/download,https://github.com/dd-Splunk/n-assets/releases/download/latest/n-assets.spl
+      # - SPLUNK_APPS_URL=https://splunkbase.splunk.com/app/1924/release/7.2.1/download,https://splunkbase.splunk.com/app/1603/release/8.2.4/download,https://splunkbase.splunk.com/app/5418/release/1.2.3/download,https://splunkbase.splunk.com/app/5419/release/1.1.2/download,https://splunkbase.splunk.com/app/1724/release/3.5.0/download,https://splunkbase.splunk.com/app/1620/release/4.2.0/download,https://github.com/dd-Splunk/n-assets/releases/download/latest/n-assets.spl
+      - SPLUNK_APPS_URL=https://github.com/dd-Splunk/n-assets/releases/download/latest/n-assets.spl,https://splunkbase.splunk.com/app/1924/release/7.2.1/download,https://splunkbase.splunk.com/app/1603/release/8.2.6/download,https://splunkbase.splunk.com/app/5418/release/1.3.1/download,https://splunkbase.splunk.com/app/5419/release/1.1.2/download,https://splunkbase.splunk.com/app/1724/release/4.0.1/download,https://splunkbase.splunk.com/app/1620/release/5.1.0/download
       - SPLUNKBASE_USERNAME
       - SPLUNKBASE_PASSWORD
       - SPLUNK_PASSWORD
