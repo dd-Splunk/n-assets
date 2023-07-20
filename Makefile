@@ -3,14 +3,9 @@ SHELL = bash
 C_DIR := $(lastword $(subst /, ,$(CURDIR)))
 
 init:
-	echo "Init Git and Python inside" $(C_DIR)
+	echo "Init Git inside" $(C_DIR)
 	git init
-	python3 -m venv .venv
-	source .venv/bin/activate
-	pip install --upgrade pip
-	touch requirements.txt
-	pip install -r requirements.txt
-	pre-commit install
+
 
 .env:
 	echo "Create .env from template"
