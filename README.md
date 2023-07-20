@@ -8,13 +8,17 @@ Download the [n-asset.spl](https://github.com/dd-Splunk/n-assets/releases/downlo
 
 From the Splunk GUI, select Apps -> Manage Apps -> Install from file and select the n-asset.spl file just downloaded.
 
-Restart Splunk to makke changes effectives.
+From the Splunk GUI, select Settings -> Data Inpputs -> SA-Eventgen -> Enable to start the Event generator
+
+Restart Splunk to make changes effectives.
 
 That's it.
 
 ## Create Assets
+
 Use the folowing spl statement
-```
+
+```SPL
 | inputlookup n_assets.csv | iplocation IPAddress
 | rename Department AS bunit, IPAddress AS ip, Location AS country, FQDN AS dns
 | rename isManaged AS is_expected, lon AS long, Mac AS mac, Username AS owner
